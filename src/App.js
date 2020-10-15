@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from "react";
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const iCounters = [0, 0, 0];
+
+    const [counters, setCounters] = useState(iCounters);
+    const addCounter = () => {
+        const newCounters = [...counters];
+        newCounters.push(0);
+        setCounters(newCounters);
+    }
+    const delCounter = (index)=>{
+        const newCounter = counters.filter((el, i )=> i !== index)
+        setCounters(newCounter)
+    }
+
+    return (
+        <div className='App'>
+
+            <button onClick={addCounter}>ADD</button>
+            {counters.map((el, i)=> <div>
+                <button>+</button>
+                {el}
+                <button>-</button>
+                <button onClick={()=> delCounter(i)}>DEL</button>
+            </div>)}
+
+
+        </div>
+    );
 }
 
-export default App;
+export default App
